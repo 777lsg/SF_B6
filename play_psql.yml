@@ -1,0 +1,7 @@
+---
+- name: "install postgres"
+  hosts: database
+  become: yes
+
+  roles:
+    - deploy_postgres

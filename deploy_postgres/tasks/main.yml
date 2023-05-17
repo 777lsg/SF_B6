@@ -1,0 +1,30 @@
+---
+# tasks file for deploy_postgres
+- name: "add rep psql"
+  lineinfile:
+    path: /etc/apt/sources.list
+    line: "{{ psql_rep }}"
+    insertafter: EOF
+
+- name: "add key rep"
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+    
+- name: "update"
+  apt:
+    update_cache: yes
+
+- name: "install psql"
+  apt:
+    name: postgresql-{{ psql_v }}
+    state: present
+
+
+- name: "Create folder"
+  file:
+    path: "{{ psql_d }}"
+    state: directory
+    mode: '0700'
+    owner: postgres
+    group: postgres

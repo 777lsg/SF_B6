@@ -1,0 +1,8 @@
+---
+- name: "install docker"
+  hosts: app
+  become: yes
+
+  roles:
+    - deploy_docker
+
